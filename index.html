@@ -1,0 +1,81 @@
+<h1 id="banksys-restlike-api">BankSys RESTlike API</h1>
+<p>This page is served to explain the usage of the <em>BankSys</em> API.</p>
+<h2 id="account">Account</h2>
+<p>An account instance represents a realworld bank account.
+|Account|DataType|
+|--|--|
+|uuid        |str        |
+|name        |str        |
+|transaction_ids| list of str        |
+|CREDIT_POSSIBLE| bool        |
+|CREDIT_MAX| float        |
+|balance| float        |</p>
+<p><em>the <strong>balance</strong> is calculated when called adding up all <strong>transactions</strong> from and to the account</em></p>
+<h3 id="get">Get</h3>
+<p>Sending a <code>get</code> request to <code>/account</code> using the parameter <code>uuid</code> containing an uuid <strong>string</strong> will yield a <strong>json</strong> object containing the account information including <strong>current balance</strong>.</p>
+<h4 id="examples">Examples</h4>
+<h5 id="url">URL</h5>
+<pre><code class="language-batch">http://{IP_ADDRESS}:{PORT}/account?uuid=[PUT_UUID_HERE_WITHOUT_BRACKETS]
+</code></pre>
+<h5 id="python-3">Python 3</h5>
+<pre><code class="language-python">import requests
+requests.get(&#39;{IP_ADDRESS}:{PORT}/account&#39;,  {&#39;uuid&#39;:&#39;[PUT_UUID_HERE_WITHOUT_BRACKETS]&#39;})
+</code></pre>
+<h3 id="create">Create</h3>
+<p>Sending a <code>post</code> request to <code>/account</code> using the parameter <code>name</code> containing a <strong>string</strong> will create a new account and <strong>return</strong> the uuid cast in <strong>json</strong>.</p>
+<h4 id="examples-1">Examples</h4>
+<h5 id="url-1">URL</h5>
+<pre><code class="language-batch">http://{IP_ADDRESS}:{PORT}/account?name=[PUT_NAME_HERE_WITHOUT_BRACKETS]
+</code></pre>
+<h5 id="python-3-1">Python 3</h5>
+<pre><code class="language-python">import requests
+requests.post(&#39;{IP_ADDRESS}:{PORT}/account&#39;,  {&#39;name&#39;:&#39;[PUT_NAME_HERE_WITHOUT_BRACKETS]&#39;})
+</code></pre>
+<h3 id="accounts">Accounts</h3>
+<p>To get all avaiable account uuid&#39;s you have to call get request to <code>/accounts</code> without any arguments.</p>
+<h4 id="examples-2">Examples</h4>
+<h5 id="url-2">URL</h5>
+<pre><code class="language-batch">http://{IP_ADDRESS}:{PORT}/accounts
+</code></pre>
+<h5 id="python-3-2">Python 3</h5>
+<pre><code class="language-python">import requests
+requests.get(&#39;{IP_ADDRESS}:{PORT}/accounts&#39;)
+</code></pre>
+<h2 id="transaction">Transaction</h2>
+<p>Represents a transaction between an origin account and a destination account.
+|Transaction|DataType|
+|--|--|
+|uuid        |str        |
+|origin|str        |
+|destination| str        |
+|value| float        |</p>
+<h3 id="get-1">Get</h3>
+<p>Sending a <code>get</code> request to <code>/transaction</code> using the parameter <code>uuid</code> containing an uuid <strong>string</strong> will yield a <strong>json</strong> object containing the transaction information.</p>
+<h4 id="examples-3">Examples</h4>
+<h5 id="url-3">URL</h5>
+<pre><code class="language-batch">http://{IP_ADDRESS}:{PORT}/transaction?uuid=[PUT_UUID_HERE_WITHOUT_BRACKETS]
+</code></pre>
+<h5 id="python-3-3">Python 3</h5>
+<pre><code class="language-python">import requests
+requests.get(&#39;{IP_ADDRESS}:{PORT}/transaction&#39;,  {&#39;uuid&#39;:&#39;[PUT_UUID_HERE_WITHOUT_BRACKETS]&#39;})
+</code></pre>
+<h3 id="create-1">Create</h3>
+<p>Sending a <code>post</code> request to <code>/transaction</code> using the parameter <code>name</code> containing a <strong>string</strong> will create a new account and <strong>return</strong> the uuid cast in <strong>json</strong>.</p>
+<h4 id="examples-4">Examples</h4>
+<h5 id="url-4">URL</h5>
+<pre><code class="language-batch">http://{IP_ADDRESS}:{PORT}/transaction?origin=[origin]&amp;destination=[destination]&amp;value=[value]
+</code></pre>
+<h5 id="python-3-4">Python 3</h5>
+<pre><code class="language-python">import requests
+requests.post(&#39;{IP_ADDRESS}:{PORT}/transaction&#39;,  {&#39;origin&#39;:&#39;[ORIGIN]&#39;, &#39;destination&#39;:&#39;[DESTINATION]&#39;, &#39;value&#39;: [floatValue]})
+</code></pre>
+<h3 id="transactions">Transactions</h3>
+<p>To get all avaiable transaction uuid&#39;s you have to call <code>get</code> request to <code>/transactions</code> without any arguments.</p>
+<h4 id="examples-5">Examples</h4>
+<h5 id="url-5">URL</h5>
+<pre><code class="language-batch">http://{IP_ADDRESS}:{PORT}/transactions
+</code></pre>
+<h5 id="python-3-5">Python 3</h5>
+<pre><code class="language-python">import requests
+requests.get(&#39;{IP_ADDRESS}:{PORT}/transactions&#39;)
+</code></pre>
